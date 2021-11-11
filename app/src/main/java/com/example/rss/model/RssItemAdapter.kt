@@ -1,4 +1,4 @@
-package com.example.rss.data
+package com.example.rss.model
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rss.R
+import com.example.rss.model.RssModelItem
 import com.example.rss.presentation.RssFragmentDirections
 
 internal  fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> Unit): T {
@@ -16,14 +17,14 @@ internal  fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type
     return this
 }
 
-class NewsItemAdapter(): RecyclerView.Adapter<NewsItemAdapter.ViewHolder>() {
-    private var newsItems: List<RssItem>? = null
+class RssItemAdapter(): RecyclerView.Adapter<RssItemAdapter.ViewHolder>() {
+    private var newsItems: List<RssModelItem>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.news_item, parent, false)
 
         return ViewHolder(view).listen{ pos, type ->
-            val action = RssFragmentDirections.actionNewsFragmentToDetailsFragment(newsItems!![pos].link)
+            val action = RssFragmentDirections.actionNewsFragmentToDetailsFragment(newsItems!![pos].link!!)
             Navigation.findNavController(view).navigate(action)
         }
     }
@@ -43,7 +44,7 @@ class NewsItemAdapter(): RecyclerView.Adapter<NewsItemAdapter.ViewHolder>() {
         return newsItems!!.size
     }
 
-    fun update(newsItems: List<RssItem>) {
+    fun update(newsItems: List<RssModelItem>) {
         this.newsItems = newsItems
     }
 

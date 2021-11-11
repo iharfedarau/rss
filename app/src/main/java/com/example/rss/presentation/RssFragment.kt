@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rss.R
-import com.example.rss.data.NewsItemAdapter
-import com.example.rss.data.RssItemModel
+import com.example.rss.model.RssItemAdapter
+import com.example.rss.model.RssItemModel
 
 class RssFragment : Fragment() {
     private lateinit var viewModel: RssItemModel
@@ -35,7 +35,7 @@ class RssFragment : Fragment() {
         val listV = view.findViewById<RecyclerView>(R.id.newsRecyclerView)
         listV.layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
 
-        val adapter = NewsItemAdapter()
+        val adapter = RssItemAdapter()
         listV.adapter = adapter
 
         viewModel.data.observe(viewLifecycleOwner, Observer {
