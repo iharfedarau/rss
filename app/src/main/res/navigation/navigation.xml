@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.example.rss.presentation.NewsFragment"
+        android:name="com.example.rss.presentation.RssFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" >
         <action
@@ -22,5 +22,8 @@
         <argument
             android:name="newsId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_detailsFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
     </fragment>
 </navigation>
