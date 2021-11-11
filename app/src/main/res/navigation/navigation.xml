@@ -9,7 +9,7 @@
         android:id="@+id/newsFragment"
         android:name="com.example.rss.presentation.RssFragment"
         android:label="fragment_news"
-        tools:layout="@layout/fragment_news" >
+        tools:layout="@layout/fragment_rss" >
         <action
             android:id="@+id/action_newsFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.io.InputStream
@@ -13,6 +14,7 @@ import java.net.URL
 
 class RssItemModel: ViewModel() {
     private var rssItems = MutableLiveData<List<RssItem>>()
+    private var loadingJob: Job? = null
 
     val data: LiveData<List<RssItem>>
         get() = rssItems
@@ -22,7 +24,7 @@ class RssItemModel: ViewModel() {
     }
 
     private fun fetchData() {
-        viewModelScope.launch(Dispatchers.IO) {
+        loadingJob = viewModelScope.launch(Dispatchers.IO) {
             val connection = URL("https://feeds.simplecast.com/54nAGcIl").openConnection() as HttpURLConnection
             connection.readTimeout = 8000
             connection.connectTimeout = 8000
@@ -40,5 +42,10 @@ class RssItemModel: ViewModel() {
                 }
             }
         }
+    }
+
+    public fun refresh() {
+        rssItems.value = listOf<RssItem>()
+        fetchData()
     }
 }
