@@ -3,17 +3,19 @@ package com.example.rss.presentation
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.example.rss.databinding.FragmentRssBinding
 import com.example.rss.model.RssItemAdapter
-import com.example.rss.model.RssItemModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
-class RssFragment : Fragment() {
-    private lateinit var viewModel: RssItemModel
+@AndroidEntryPoint
+class RssFragment @Inject constructor(
+): Fragment() {
+    private val viewModel: RssItemViewModel by viewModels()
     private  lateinit var binding: FragmentRssBinding
 
     override fun onCreateView(
@@ -38,8 +40,6 @@ class RssFragment : Fragment() {
                 binding.swipeContainer.setRefreshing(false);
             }
         }
-
-        viewModel = ViewModelProvider(this).get(RssItemModel::class.java)
 
         binding.newsRecyclerView.layoutManager = LinearLayoutManager(
             view.context,

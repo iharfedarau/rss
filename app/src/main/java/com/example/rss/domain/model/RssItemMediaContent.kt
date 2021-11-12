@@ -1,9 +1,9 @@
-package com.example.rss.model
+package com.example.rss.domain.model
 
 import org.simpleframework.xml.*
 
 @Root(name = "media:content", strict = false)
-data class RssModelMediaContentItem @JvmOverloads constructor(
+data class RssItemMediaContent(
     @field:Attribute(name = "url")
     @param:Attribute(name = "url")
     var url: String? = null,
