@@ -9,34 +9,33 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rss.R
+import com.example.rss.databinding.FragmentDetailsBinding
+import com.example.rss.databinding.FragmentRssBinding
 import com.example.rss.model.RssItemAdapter
 import com.example.rss.model.RssItemModel
 
 class RssFragment : Fragment() {
     private lateinit var viewModel: RssItemModel
+    private  lateinit var binding: FragmentRssBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+    override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_rss, container, false)
+        binding = FragmentRssBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val refreshButton = view.findViewById<ImageButton>(R.id.refreshRssButton)
-        refreshButton.setOnClickListener {
+        binding.refreshRssButton.setOnClickListener {
             viewModel.refresh()
         }
 
         viewModel = ViewModelProvider(this).get(RssItemModel::class.java)
 
-        val listV = view.findViewById<RecyclerView>(R.id.newsRecyclerView)
-        listV.layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
-
+        binding.newsRecyclerView.layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
         val adapter = RssItemAdapter()
-        listV.adapter = adapter
+        binding.newsRecyclerView.adapter = adapter
 
         viewModel.data.observe(viewLifecycleOwner, Observer {
             adapter.update(it)
