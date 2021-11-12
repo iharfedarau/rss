@@ -3,9 +3,11 @@ package com.example.rss.model
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.rss.R
 import com.example.rss.domain.model.RssItem
 import com.example.rss.presentation.RssFragmentDirections
@@ -31,6 +33,7 @@ class RssItemAdapter(): RecyclerView.Adapter<RssItemAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val newsItem = newsItems!![position]
+        Glide.with(holder.ivMediaContent.getContext()).load(newsItem.mediaContentMediaContent!!.url).into(holder.ivMediaContent);
 
         holder.newsTitle.text = newsItem.title?:""
         holder.newsDescription.text = newsItem.description
@@ -49,6 +52,7 @@ class RssItemAdapter(): RecyclerView.Adapter<RssItemAdapter.ViewHolder>() {
     }
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
+        val ivMediaContent: ImageView = itemView.findViewById(R.id.ivMediaContent)
         val newsTitle: TextView = itemView.findViewById(R.id.newsTitle)
         val newsDescription: TextView = itemView.findViewById(R.id.newsDescription)
         val newsLink: TextView = itemView.findViewById(R.id.newsLink)
