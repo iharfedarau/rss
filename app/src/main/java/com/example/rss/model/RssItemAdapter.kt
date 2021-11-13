@@ -23,7 +23,7 @@ class RssItemAdapter(): RecyclerView.Adapter<RssItemAdapter.ViewHolder>() {
     private var newsItems: List<RssItem>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.news_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.rss_item, parent, false)
 
         return ViewHolder(view).listen{ pos, type ->
             val action = RssFragmentDirections.actionNewsFragmentToDetailsFragment(newsItems!![pos].link!!)
@@ -34,10 +34,7 @@ class RssItemAdapter(): RecyclerView.Adapter<RssItemAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val newsItem = newsItems!![position]
         Glide.with(holder.ivMediaContent.getContext()).load(newsItem.mediaContentMediaContent!!.url).into(holder.ivMediaContent);
-
         holder.newsTitle.text = newsItem.title?:""
-        holder.newsDescription.text = newsItem.description
-        holder.newsLink.text = newsItem.link
     }
 
     override fun getItemCount(): Int {
@@ -54,7 +51,5 @@ class RssItemAdapter(): RecyclerView.Adapter<RssItemAdapter.ViewHolder>() {
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val ivMediaContent: ImageView = itemView.findViewById(R.id.ivMediaContent)
         val newsTitle: TextView = itemView.findViewById(R.id.newsTitle)
-        val newsDescription: TextView = itemView.findViewById(R.id.newsDescription)
-        val newsLink: TextView = itemView.findViewById(R.id.newsLink)
     }
 }
