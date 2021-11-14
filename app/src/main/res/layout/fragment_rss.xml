@@ -28,6 +28,18 @@
                 tools:layout_editor_absoluteY="10dp">
 
 
+                <TextView
+                    android:id="@+id/tvRssSource"
+                    style="@style/Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="https://www.yahoo.com/news/rss"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/refreshRssButton"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <ImageButton
                     android:id="@+id/refreshRssButton"
                     android:layout_width="wrap_content"

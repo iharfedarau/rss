@@ -16,4 +16,8 @@
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/white</item>
     </style>
+    <style name="Title" parent="Theme.Rss">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>
