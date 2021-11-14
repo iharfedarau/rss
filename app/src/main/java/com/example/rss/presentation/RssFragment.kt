@@ -5,10 +5,8 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rss.databinding.FragmentRssBinding
-import com.example.rss.model.RssItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

@@ -31,9 +31,7 @@ class RssItemViewModel @Inject constructor(
     private var getRssItemsJob: Job? = null
 
     private var rssItems = MutableLiveData<List<RssItem>>()
-
-    val data: LiveData<List<RssItem>>
-        get() = rssItems
+    val data: LiveData<List<RssItem>> = rssItems
 
     init {
         getRssItems()
@@ -41,6 +39,8 @@ class RssItemViewModel @Inject constructor(
 
     private fun fetchData(onRefresFinished: suspend () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
+            rssItemUseCases.clearTable()
+
             val response  = try {
                 RetrofitInstance.api.getRssModelRootItem()
             } catch (e: IOException) {
@@ -54,8 +54,10 @@ class RssItemViewModel @Inject constructor(
             }
 
             if (response != null) {
-                rssItemUseCases.clearTable()
-                rssItemUseCases.insertRssItems((response as RssRoot).rssItemList!!)
+                val rssItems = (response as RssRoot).rssItemList
+                if (rssItems != null) {
+                    rssItemUseCases.insertRssItems(rssItems)
+                }
             }
         }
     }

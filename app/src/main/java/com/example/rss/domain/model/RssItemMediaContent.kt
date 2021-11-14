@@ -1,6 +1,5 @@
 package com.example.rss.domain.model
 
-import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import org.simpleframework.xml.*
 

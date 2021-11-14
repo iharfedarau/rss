@@ -2,7 +2,6 @@ package com.example.rss.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.rss.R
 import com.example.rss.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
