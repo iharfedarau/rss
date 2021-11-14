@@ -46,7 +46,7 @@ class RssFragment @Inject constructor(
             LinearLayoutManager.VERTICAL,
             false
         )
-        val adapter = RssItemAdapter()
+        val adapter = RssItemAdapter(requireContext())
         binding.newsRecyclerView.adapter = adapter
 
         viewModel.data.observe(viewLifecycleOwner, Observer {

@@ -9,4 +9,6 @@ interface RssItemRepository {
     suspend fun getRssItemById(id: Int): RssItem?
 
     suspend fun insertRssItems(items: List<RssItem>)
+
+    suspend fun clearTable();
 }

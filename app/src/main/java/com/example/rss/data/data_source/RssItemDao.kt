@@ -7,7 +7,6 @@ import androidx.room.Query
 import com.example.rss.domain.model.RssItem
 import kotlinx.coroutines.flow.Flow
 
-
 @Dao
 interface RssItemDao {
     @Query("SELECT * FROM rssitem")
@@ -18,4 +17,7 @@ interface RssItemDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRssItems(items: List<RssItem>)
+
+    @Query("DELETE FROM rssitem")
+    fun clearTable()
 }

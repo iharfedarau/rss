@@ -19,4 +19,8 @@ class RssItemRepositoryImpl(
     override suspend fun insertRssItems(items: List<RssItem>) {
         dao.insertRssItems(items)
     }
+
+    override suspend fun clearTable() {
+        dao.clearTable()
+    }
 }

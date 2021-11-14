@@ -7,6 +7,7 @@ import com.example.rss.data.data_source.RssItemDatabase
 import com.example.rss.data.repository.RssItemRepositoryImpl
 import com.example.rss.domain.model.RssItem
 import com.example.rss.domain.repository.RssItemRepository
+import com.example.rss.domain.use_case.ClearTable
 import com.example.rss.domain.use_case.GetRssItems
 import com.example.rss.domain.use_case.InsertRssItems
 import com.example.rss.domain.use_case.RssItemUseCases
@@ -42,7 +43,8 @@ object AppModule {
     fun provideRssItemUseCases(repository: RssItemRepository): RssItemUseCases{
         return RssItemUseCases(
             getRssItems = GetRssItems(repository),
-            insertRssItems =  InsertRssItems(repository)
+            insertRssItems =  InsertRssItems(repository),
+            clearTable = ClearTable(repository)
         )
     }
 }

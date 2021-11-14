@@ -1,5 +1,6 @@
 package com.example.rss.model
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,7 @@ internal  fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type
     return this
 }
 
-class RssItemAdapter(): RecyclerView.Adapter<RssItemAdapter.ViewHolder>() {
+class RssItemAdapter(val context: Context): RecyclerView.Adapter<RssItemAdapter.ViewHolder>() {
     private var newsItems: List<RssItem>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,7 +34,9 @@ class RssItemAdapter(): RecyclerView.Adapter<RssItemAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val newsItem = newsItems!![position]
-        Glide.with(holder.ivMediaContent.getContext()).load(newsItem.mediaContentMediaContent!!.url).into(holder.ivMediaContent);
+        if (newsItem.mediaContentMediaContent != null && newsItem.mediaContentMediaContent.url != null) {
+            Glide.with(context).load(newsItem.mediaContentMediaContent!!.url).into(holder.ivMediaContent);
+        }
         holder.newsTitle.text = newsItem.title?:""
     }
 

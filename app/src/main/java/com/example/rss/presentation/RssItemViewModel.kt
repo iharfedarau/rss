@@ -54,6 +54,7 @@ class RssItemViewModel @Inject constructor(
             }
 
             if (response != null) {
+                rssItemUseCases.clearTable()
                 rssItemUseCases.insertRssItems((response as RssRoot).rssItemList!!)
             }
         }
