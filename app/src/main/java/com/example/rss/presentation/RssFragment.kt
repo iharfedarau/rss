@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.rss.R
 import com.example.rss.databinding.FragmentRssBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -28,12 +29,16 @@ class RssFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
 
         binding.toolbar.setTitle("https://www.yahoo.com/news/rss");
-
-        binding.refreshRssButton.setOnClickListener {
-            binding.swipeContainer.setRefreshing(true);
-            viewModel.refresh{
-                binding.swipeContainer.setRefreshing(false);
+        binding.toolbar.inflateMenu(R.menu.rss_menu)
+        binding.toolbar.setOnMenuItemClickListener { item: MenuItem? ->
+            when (item!!.itemId) {
+                R.id.refreshItem -> {
+                    binding.swipeContainer.setRefreshing(true)
+                    viewModel.refresh{ binding.swipeContainer.setRefreshing(false)}
+                }
+                else -> throw IllegalStateException("Unknown menu item")
             }
+            true
         }
 
         binding.swipeContainer.setOnRefreshListener{
