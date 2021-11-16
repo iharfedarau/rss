@@ -27,6 +27,8 @@ class RssFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.toolbar.setTitle("https://www.yahoo.com/news/rss");
+
         binding.refreshRssButton.setOnClickListener {
             binding.swipeContainer.setRefreshing(true);
             viewModel.refresh{
